@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Poppins-Regular'; 
+  src: url('../public/Poppins-Regular.ttf'); 
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins-Regular', sans-serif;
+}
+
+.projectchatrealtime{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #323232;
+  color: white;
+}
+
+.projectchatrealtime_title{
+  font-size: 40px;
+  color:#FFCA0E;
+}
+.projectchatrealtime label {
+  font-size: 32px;
+}
+.projectchatrealtime input {
+  width: 300px;
+  height: 40px;
+  background-color: #323232;
+  border: 2px solid white;
+  border-radius: 16px;
+  outline: none;
+  color: white;
+  font-size: 16px;
+}
+.projectchatrealtime input::placeholder {
+  padding-left: 2%;
+  color: white;
+}
+
+.projectchatrealtime input:focus {
+  border:3px solid #FFCA0E;
+}
+
+.projectchatrealtime button {
+  width: 300px;
+  height: 40px;
+  background-color: #FFCA0E;
+  color:#323232;
+  border-radius: 16px;
+  border: 2px solid #FFCA0E;
+  font-size: 20px;
+  cursor: pointer;
+}
