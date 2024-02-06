@@ -4,11 +4,13 @@ import WarningComponent from '../../components/WarningComponent'
 import { useNavigate } from 'react-router-dom'
 import { MdDriveFileRenameOutline } from "react-icons/md"
 import { MdDescription } from "react-icons/md"
+import { MdPublic } from "react-icons/md"
 import { MdOutlinePrivacyTip } from "react-icons/md"
 
 const Home = () => {
     const [showUserName, setShowUserName] = useState(null)
     const [showUserEmail, setShowUserEmail] = useState(null)
+    const [contentChatRooms, setContentChatRooms] = useState([])
     const [divShowInputChatRoom, setDivShowInputChatRoom] = useState(false)
     const [inputNameChatRoom, setInputNameChatRoom] = useState(null)
     const [inputSelectedAccess, setInputSelectedAccess] = useState(null)
@@ -19,10 +21,6 @@ const Home = () => {
     const usersString = localStorage.getItem('users')
     const users = JSON.parse(usersString)
     const userLogged = localStorage.getItem('userLogged')
-
-    useEffect(() => {
-        console.log('Valor de showUserName:', showUserName)
-    }, [showUserName])
     
     useEffect(() => {
         if (!userLogged) {
@@ -36,18 +34,28 @@ const Home = () => {
         }
     }, [userLogged, navigate, users])
 
-
     useEffect(() => {
-  
-        if (divAlert) {
-        const timeoutId = setTimeout(() => {
-            setDivAlert(false)
-            setDivTextAlert(null)
-        }, 3000)
+        const intervalId = setInterval(() => {
+          const chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
+          if (chatRooms) {
+            setContentChatRooms(chatRooms)
+          }
+        }, 5000)
+      
+        return () => clearInterval(intervalId)
+      }, [])
     
-        return () => clearTimeout(timeoutId)
-        }
-      }, [divAlert])
+    useEffect(() => {
+
+    if (divAlert) {
+    const timeoutId = setTimeout(() => {
+        setDivAlert(false)
+        setDivTextAlert(null)
+    }, 3000)
+
+    return () => clearTimeout(timeoutId)
+    }
+    }, [divAlert])
     
 
     
@@ -118,6 +126,28 @@ const Home = () => {
                 {showUserName &&<div>  {showUserName.toUpperCase()}!</div>}
                 
             </div>
+            {contentChatRooms &&
+                <>  
+                    <br/>
+                    <label><b className='projectChatRealTimeHome_textYellow'>S A L A S</b></label>
+                    <br/>
+                </>
+                
+            }
+            {contentChatRooms && contentChatRooms.map((room, index) => (
+                    <div key={index} className='projectChatRealTimeHome_rooms'>
+                        {room.accessType === 'public' || (room.accessType === 'private' && room.emailAccessList.includes(userLogged)) ? (
+                            <>
+                                <div className='projectChatRealTimeHome_roomsItem'>
+                                    <div>{room.name.toUpperCase()} </div>
+                                    {room.accessType === 'private' ? <MdOutlinePrivacyTip size={24} /> : <MdPublic size={24} />}
+                                </div>
+                                <div className='projectChatRealTimeHome_roomsDescription'>Descrição: {room.description}</div>
+                            </>
+                        ) : null}
+                    </div>
+            ))}
+            <br/>
             <button onClick={handleShowNewChatRoom}>Nova Sala</button>
             {divShowInputChatRoom &&
                 <>
@@ -125,19 +155,19 @@ const Home = () => {
                     <label><b className='projectChatRealTimeHome_textYellow'>C A D A S T R O (S A L A)</b></label>
                     <br/>
                     <div className='projectChatRealTimeHomeRowGap'>
-                        <MdDriveFileRenameOutline />
+                        <MdDriveFileRenameOutline size={24} />
                         <label>Digite o nome da sala:</label>
                     </div>
                     <input type='text' placeholder='Nome' value={inputNameChatRoom} onChange={(e) => setInputNameChatRoom(e.target.value)}></input>
 
                     <div className='projectChatRealTimeHomeRowGap'>
-                        <MdDescription />
+                        <MdDescription size={24} />
                         <label>Digite a descrição da sala:</label>
                     </div>
                     <input type='text' placeholder='Descrição' value={inputDescriptionChatRoom} onChange={(e) => setInputDescriptionChatRoom(e.target.value)}></input>
 
                     <div className='projectChatRealTimeHomeRowGap'>
-                        <MdOutlinePrivacyTip />
+                        <MdOutlinePrivacyTip size={24} />
                         <label>Selecione a privacidade da sala:</label>
                     </div>
                     <select id="access-select" value={inputSelectedAccess} onChange={handleAccessChange}>

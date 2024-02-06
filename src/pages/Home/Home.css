@@ -18,6 +18,7 @@
   }
 
   .projectChatRealTimeHome_textYellow{
+    padding-left: 3%;
     color:#FFCA0E;
   }
 
@@ -65,4 +66,25 @@
   }
   .projectChatRealTimeHome label {
     font-size: 24px;
+  }
+
+  .projectChatRealTimeHome_rooms{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+  }
+  
+  .projectChatRealTimeHome_roomsItem{
+    max-width: 300px;
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+    padding:10px 10px 3px 10px;
+    border-bottom: 2px solid #a7a7a7;
+  }
+
+  .projectChatRealTimeHome_roomsDescription{
+    padding-left: 3%;
+    font-size: 14px;
+    color:#a7a7a7 ;
   }

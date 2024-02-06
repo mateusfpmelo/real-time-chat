@@ -166,7 +166,7 @@ const LoginRegister = () => {
       <div className='projectChatRealTime'>
         <div className='projectChatRealTime_title'><b>Olá,</b></div>
         <div className='projectChatRealTimeRowGap'>
-          <CiMail />
+          <CiMail size={24} />
           <label>Informe seu e-mail:</label>
         </div>
         <input type='text' className='projectChatRealTime_input' placeholder='Digite seu e-mail' value={inputEmail} onChange={(e) => setInputEmail(e.target.value)}></input>
@@ -178,19 +178,19 @@ const LoginRegister = () => {
         {divContinueRegister && 
           <>
             <div className='projectChatRealTimeRowGap'>
-              <MdDriveFileRenameOutline />
+              <MdDriveFileRenameOutline size={24} />
               <label>Digite seu nome:</label>
             </div>
             <input type='text' className='projectChatRealTime_input' placeholder='Exemplo: Carlos Eduardo' value={inputRegisterName} onChange={(e) => setInputRegisterName(e.target.value)}></input>
             
             <div className='projectChatRealTimeRowGap'>
-              <RiLockPasswordLine />
+              <RiLockPasswordLine size={24} />
               <label>Crie uma senha:</label>
             </div>
             <input type='password' className='projectChatRealTime_input' placeholder='Crie uma senha' value={inputRegisterPsw} onChange={(e) => setInputRegisterPsw(e.target.value)}></input>
             
             <div className='projectChatRealTimeRowGap'>
-              <RiLockPasswordLine />
+              <RiLockPasswordLine size={24} />
               <label>Digite novamente a senha:</label>
             </div>
             <input type='password' className='projectChatRealTime_input' placeholder='Digite novamente a senha' value={inputConfirmRegisterPsw} onChange={ConfirmEqualPsw}></input>
@@ -206,7 +206,7 @@ const LoginRegister = () => {
         {divContinueLogin &&
           <>
             <div className='projectChatRealTimeRowGap'>
-              <RiLockPasswordLine />
+              <RiLockPasswordLine size={24} />
               <label>Informe sua senha:</label>
             </div>
             <input type='password' className='projectChatRealTime_input' placeholder='Digite sua senha' value={inputPsw} onChange={(e) => setInputPsw(e.target.value)}></input>
