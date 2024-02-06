@@ -41,8 +41,11 @@ function App() {
 
     return () => clearTimeout(timeoutId)
     }
-}, [divAlert])
+  }, [divAlert])
 
+  const clearLocalStorage = () => {
+    localStorage.removeItem('users')
+  }
   const handleContinue = () => {
     if (!isValidEmail(inputEmail)){
       setDivTextAlert('Por favor, insira um e-mail válido!')
@@ -99,16 +102,17 @@ function App() {
     console.log('users apos a inserção:', users)
     setButtonContinuar(true)
     setDivContinueRegister(false)
+    setInputEmail('')
   }
 
   return (
-    <div className='projectchatrealtime'>
-      <div className='projectchatrealtime_title'><b>Olá,</b></div>
-      <div className='projectchatrealtimeRowGap'>
+    <div className='projectChatRealTime'>
+      <div className='projectChatRealTime_title'><b>Olá,</b></div>
+      <div className='projectChatRealTimeRowGap'>
         <CiMail />
         <label>Informe seu e-mail:</label>
       </div>
-      <input type='text' className='projectchatrealtime_input' placeholder='Digite seu e-mail' value={inputEmail} onChange={(e) => setInputEmail(e.target.value)}></input>
+      <input type='text' className='projectChatRealTime_input' placeholder='Digite seu e-mail' value={inputEmail} onChange={(e) => setInputEmail(e.target.value)}></input>
       {buttonContinuar && 
         <>
           <button onClick={handleContinue}>Continuar</button>
@@ -116,33 +120,33 @@ function App() {
       }
       {divContinueRegister && 
         <>
-          <div className='projectchatrealtimeRowGap'>
+          <div className='projectChatRealTimeRowGap'>
             <MdDriveFileRenameOutline />
             <label>Digite seu nome:</label>
           </div>
-          <input type='text' className='projectchatrealtime_input' placeholder='Exemplo: Carlos Eduardo' value={inputRegisterName} onChange={(e) => setInputRegisterName(e.target.value)}></input>
+          <input type='text' className='projectChatRealTime_input' placeholder='Exemplo: Carlos Eduardo' value={inputRegisterName} onChange={(e) => setInputRegisterName(e.target.value)}></input>
           
-          <div className='projectchatrealtimeRowGap'>
+          <div className='projectChatRealTimeRowGap'>
             <RiLockPasswordLine />
             <label>Crie uma senha:</label>
           </div>
-          <input type='password' className='projectchatrealtime_input' placeholder='Crie uma senha' value={inputRegisterPsw} onChange={(e) => setInputRegisterPsw(e.target.value)}></input>
+          <input type='password' className='projectChatRealTime_input' placeholder='Crie uma senha' value={inputRegisterPsw} onChange={(e) => setInputRegisterPsw(e.target.value)}></input>
           
-          <div className='projectchatrealtimeRowGap'>
+          <div className='projectChatRealTimeRowGap'>
             <RiLockPasswordLine />
             <label>Digite novamente a senha:</label>
           </div>
-          <input type='password' className='projectchatrealtime_input' placeholder='Digite novamente a senha' value={inputConfirmRegisterPsw} onChange={(e) => setInputConfirmRegisterPsw(e.target.value)}></input>
+          <input type='password' className='projectChatRealTime_input' placeholder='Digite novamente a senha' value={inputConfirmRegisterPsw} onChange={(e) => setInputConfirmRegisterPsw(e.target.value)}></input>
           <button onClick={handleNewUser}>Cadastrar</button>
         </>
       }
       {divContinueLogin &&
         <>
-          <div className='projectchatrealtimeRowGap'>
+          <div className='projectChatRealTimeRowGap'>
             <RiLockPasswordLine />
             <label>Informe sua senha:</label>
           </div>
-          <input type='password' className='projectchatrealtime_input' placeholder='Digite sua senha' value={inputPsw} onChange={(e) => setInputPsw(e.target.value)}></input>
+          <input type='password' className='projectChatRealTime_input' placeholder='Digite sua senha' value={inputPsw} onChange={(e) => setInputPsw(e.target.value)}></input>
           <button>Login</button>
         </>
       }
@@ -151,6 +155,7 @@ function App() {
           <WarningComponent InfoText={divTextAlert}/>
         </>
       }
+      <div className='projectChatRealTime_clearStorage' onClick={clearLocalStorage}>Clear Storage</div>
     </div>
   )
 }

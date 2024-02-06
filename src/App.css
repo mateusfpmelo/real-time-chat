@@ -8,7 +8,7 @@
     margin: 0;
   }
   
-  .projectchatrealtime{
+  .projectChatRealTime{
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -19,20 +19,20 @@
     color: white;
   }
   
-  .projectchatrealtimeRowGap{
+  .projectChatRealTimeRowGap{
     display: flex;
     flex-direction: row;
     gap: 8px;
     align-items: center;
   }
-  .projectchatrealtime_title{
+  .projectChatRealTime_title{
     font-size: 40px;
     color:#FFCA0E;
   }
-  .projectchatrealtime label {
+  .projectChatRealTime label {
     font-size: 24px;
   }
-  .projectchatrealtime input {
+  .projectChatRealTime input {
     width: 300px;
     height: 40px;
     background-color: #323232;
@@ -42,24 +42,34 @@
     color: white;
     font-size: 16px;
   }
-  .projectchatrealtime input::placeholder {
+  .projectChatRealTime input::placeholder {
     padding-left: 2%;
     color: #a7a7a7;
   }
   
-  .projectchatrealtime input:focus {
+  .projectChatRealTime input:focus {
     border:3px solid #FFCA0E;
   }
   
-  .projectchatrealtime button {
+  .projectChatRealTime button {
     width: 300px;
     height: 40px;
     background-color: #FFCA0E;
     color:#323232;
     border-radius: 16px;
     border: 2px solid #FFCA0E;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
   }
-  
+  .projectChatRealTime_clearStorage{
+    width: 300px;
+    height: 40px;
+    border: 2px solid #FFCA0E;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+  }
   
