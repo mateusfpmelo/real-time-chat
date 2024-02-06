@@ -4,6 +4,7 @@ import WarningComponent from '../../components/WarningComponent'
 import { CiMail } from "react-icons/ci"
 import { MdDriveFileRenameOutline } from "react-icons/md"
 import { RiLockPasswordLine } from "react-icons/ri"
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -19,12 +20,13 @@ const LoginRegister = () => {
     const [divAlert, setDivAlert] = useState(false)
     const [divTextAlert, setDivTextAlert] = useState(null)
     const [buttonContinuar, setButtonContinuar] = useState(true)
+    const [passwordMatch, setPasswordMatch] = useState(true)
+    const navigate = useNavigate()
+    
   
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify([]))
-      console.log('Criado:', localStorage.getItem('users'))
-    }else{
-      console.log('já estava criado:', localStorage.getItem('users'))
+      //console.log('Criado:', localStorage.getItem('users'))
     }
   
     function isValidEmail(email) {
@@ -114,6 +116,52 @@ const LoginRegister = () => {
       setInputEmail('')
     }
   
+    const ConfirmEqualPsw =  (e) => {
+      setInputConfirmRegisterPsw(e.target.value)
+
+      if(inputRegisterPsw === e.target.value){
+          setPasswordMatch(true)
+      }else{
+          setPasswordMatch(false)
+      }
+
+    }
+
+    
+    const handleLogin = () => {
+      if(!inputEmail){
+        setDivTextAlert('E-mail não informado.')
+        setDivAlert(true)
+        return
+      }
+      if(!inputPsw){
+        setDivTextAlert('Senha não informada.')
+        setDivAlert(true)
+        return
+      }
+
+      const users = JSON.parse(localStorage.getItem('users'))
+      const user = users.find(user => user.email === inputEmail)
+
+      if (!user) {
+        setDivTextAlert('E-mail não encontrado. ')
+        setDivAlert(true)
+        return
+      }
+
+      if (user.senha !== inputPsw) {
+        setDivTextAlert('Senha incorreta.')
+        setDivAlert(true)
+        return
+      }
+      localStorage.setItem('userLogged', inputEmail)
+      navigate('/home')
+
+    } 
+
+
+
+
     return (
       <div className='projectChatRealTime'>
         <div className='projectChatRealTime_title'><b>Olá,</b></div>
@@ -145,7 +193,13 @@ const LoginRegister = () => {
               <RiLockPasswordLine />
               <label>Digite novamente a senha:</label>
             </div>
-            <input type='password' className='projectChatRealTime_input' placeholder='Digite novamente a senha' value={inputConfirmRegisterPsw} onChange={(e) => setInputConfirmRegisterPsw(e.target.value)}></input>
+            <input type='password' className='projectChatRealTime_input' placeholder='Digite novamente a senha' value={inputConfirmRegisterPsw} onChange={ConfirmEqualPsw}></input>
+            
+            {!passwordMatch && 
+              <div className='projectChatRealTime_matchPsw'>
+                Senhas não conferem!
+              </div>
+            }
             <button onClick={handleNewUser}>Cadastrar</button>
           </>
         }
@@ -156,7 +210,7 @@ const LoginRegister = () => {
               <label>Informe sua senha:</label>
             </div>
             <input type='password' className='projectChatRealTime_input' placeholder='Digite sua senha' value={inputPsw} onChange={(e) => setInputPsw(e.target.value)}></input>
-            <button>Login</button>
+            <button onClick={handleLogin}>Login</button>
           </>
         }
         {divAlert && 

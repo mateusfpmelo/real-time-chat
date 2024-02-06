@@ -1,0 +1,68 @@
+
+  
+  .projectChatRealTimeHome{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 100vh;
+    background-color: #323232;
+    color: white;
+    padding:3%;
+  }
+
+  .projectChatRealTimeHome_title{
+    font-size: 64px;
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+  }
+
+  .projectChatRealTimeHome_textYellow{
+    color:#FFCA0E;
+  }
+
+  .projectChatRealTimeHome input {
+    max-width: 800px;
+    height: 40px;
+    background-color: #323232;
+    border: 2px solid white;
+    border-radius: 16px;
+    outline: none;
+    color: white;
+    font-size: 16px;
+  }
+  .projectChatRealTimeHome input::placeholder {
+    padding-left: 2%;
+    color: #a7a7a7;
+  }
+  
+  .projectChatRealTimeHome select {
+    max-width: 800px;
+    height: 40px;
+    background-color: #323232;
+    border: 2px solid white;
+    border-radius: 16px;
+    outline: none;
+    color: white;
+    font-size: 16px;
+  }
+  .projectChatRealTimeHome button {
+    width: 300px;
+    height: 40px;
+    background-color: #FFCA0E;
+    color:#323232;
+    border-radius: 16px;
+    border: 2px solid #FFCA0E;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .projectChatRealTimeHomeRowGap{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+  .projectChatRealTimeHome label {
+    font-size: 24px;
+  }
