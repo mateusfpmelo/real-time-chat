@@ -45,6 +45,14 @@ function App() {
 
   const clearLocalStorage = () => {
     localStorage.removeItem('users')
+    setButtonContinuar(true)
+    setDivContinueLogin(false)
+    setDivContinueRegister(false)
+    setInputEmail('')
+    setInputRegisterName('')
+    setInputRegisterPsw('')
+    setInputConfirmRegisterPsw('')
+    setInputPsw('')
   }
   const handleContinue = () => {
     if (!isValidEmail(inputEmail)){
