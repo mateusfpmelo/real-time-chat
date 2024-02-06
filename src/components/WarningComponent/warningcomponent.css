@@ -1,0 +1,12 @@
+
+.warningComponent{
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 10px;
+    border-radius: 16px;
+    color: #323232;
+  }
+  
