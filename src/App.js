@@ -138,7 +138,10 @@ function App() {
       }
       {divContinueLogin &&
         <>
-          <label>Informe sua senha:</label>
+          <div className='projectchatrealtimeRowGap'>
+            <RiLockPasswordLine />
+            <label>Informe sua senha:</label>
+          </div>
           <input type='password' className='projectchatrealtime_input' placeholder='Digite sua senha' value={inputPsw} onChange={(e) => setInputPsw(e.target.value)}></input>
           <button>Login</button>
         </>
