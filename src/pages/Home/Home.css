@@ -102,6 +102,30 @@
     cursor: pointer;
   }
 
+  .projectChatRealTimeHomeSecondButton {
+    width: 150px;
+    height: 40px;
+    border-radius: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    color:#a7a7a7;
+    display: flex;
+    align-items: center;
+  }
+
+  .projectChatRealTimeHomeSecondButton:hover {
+    background-color: #a7a7a7;
+    width: 150px;
+    height: 40px;
+    border-radius: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    color:white;
+    display: flex;
+    align-items: center;
+    padding-left:1%;
+  }
+  
   @media (max-width: 768px) {
     
     .projectChatRealTimeHome_title{
