@@ -136,7 +136,7 @@ const Home = () => {
         <div className='projectChatRealTimeHome'>
             <>
                 <div className='projectChatRealTimeHome_title'>
-                    <div className='projectChatRealTimeHome_textYellow'>Olá, </div>
+                    <div className='projectChatRealTimeHome_textYellowNotPat'>Olá, </div>
                     {showUserName &&<div>  {showUserName.toUpperCase()}!</div>}
                     
                 </div>

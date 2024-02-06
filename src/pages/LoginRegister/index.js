@@ -57,6 +57,7 @@ const LoginRegister = () => {
       setInputConfirmRegisterPsw('')
       setInputPsw('')
     }
+
     const handleContinue = () => {
       if (!isValidEmail(inputEmail)){
         setDivTextAlert('Por favor, insira um e-mail válido!')
@@ -114,6 +115,8 @@ const LoginRegister = () => {
       setButtonContinuar(true)
       setDivContinueRegister(false)
       setInputEmail('')
+      setDivTextAlert('Cadastrado com sucesso!')
+      setDivAlert(true)
     }
   
     const ConfirmEqualPsw =  (e) => {
