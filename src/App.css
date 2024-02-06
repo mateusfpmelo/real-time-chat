@@ -64,7 +64,7 @@
   .projectChatRealTime_clearStorage{
     width: 300px;
     height: 40px;
-    border: 2px solid #FFCA0E;
+    color: #a7a7a7;
     border-radius: 16px;
     display: flex;
     align-items: center;
