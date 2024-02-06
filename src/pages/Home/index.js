@@ -34,16 +34,23 @@ const Home = () => {
         }
     }, [userLogged, navigate, users])
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-          const chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
-          if (chatRooms) {
+    
+    const updateChatRooms = () => {
+        const chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
+        if (chatRooms) {
             setContentChatRooms(chatRooms)
-          }
+        }
+    }
+
+    useEffect(() => {
+        updateChatRooms()
+    
+        const intervalId = setInterval(() => {
+            updateChatRooms()
         }, 5000)
-      
+    
         return () => clearInterval(intervalId)
-      }, [])
+    }, [])
     
     useEffect(() => {
 
@@ -117,6 +124,8 @@ const Home = () => {
 
         let chatRoomsUpdated = JSON.parse(localStorage.getItem('chatRooms'))
         console.log('Chat Rooms:', chatRoomsUpdated)
+        updateChatRooms()
+
 
     }
     return(
@@ -126,29 +135,33 @@ const Home = () => {
                 {showUserName &&<div>  {showUserName.toUpperCase()}!</div>}
                 
             </div>
-            {contentChatRooms &&
-                <>  
+            {contentChatRooms != '' &&
+                <>
                     <br/>
                     <label><b className='projectChatRealTimeHome_textYellow'>S A L A S</b></label>
                     <br/>
                 </>
-                
             }
             {contentChatRooms && contentChatRooms.map((room, index) => (
                     <div key={index} className='projectChatRealTimeHome_rooms'>
                         {room.accessType === 'public' || (room.accessType === 'private' && room.emailAccessList.includes(userLogged)) ? (
                             <>
                                 <div className='projectChatRealTimeHome_roomsItem'>
-                                    <div>{room.name.toUpperCase()} </div>
                                     {room.accessType === 'private' ? <MdOutlinePrivacyTip size={24} /> : <MdPublic size={24} />}
+                                    <div>{room.name.toUpperCase()} </div>
+                                    
                                 </div>
                                 <div className='projectChatRealTimeHome_roomsDescription'>Descrição: {room.description}</div>
+                                
+                                <div className='projectChatRealTimeHome_roomsButtonAcess'>ACESSAR</div>
+                                
                             </>
                         ) : null}
                     </div>
             ))}
             <br/>
             <button onClick={handleShowNewChatRoom}>Nova Sala</button>
+            <br/>
             {divShowInputChatRoom &&
                 <>
                     <br/>
@@ -170,12 +183,15 @@ const Home = () => {
                         <MdOutlinePrivacyTip size={24} />
                         <label>Selecione a privacidade da sala:</label>
                     </div>
+                    <div>*salas privadas só são acessadas com liberação do criador da sala.</div>
                     <select id="access-select" value={inputSelectedAccess} onChange={handleAccessChange}>
                         <option value="">Selecione</option>
                         <option value="public">Pública</option>
                         <option value="private">Privada</option>
                     </select>
                     <button onClick={handleNewChatRoom}>Criar Sala</button>
+                    <br />
+                    <br />
                 </>
             }
             {divAlert && 

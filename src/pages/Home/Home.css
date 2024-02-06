@@ -11,7 +11,7 @@
   }
 
   .projectChatRealTimeHome_title{
-    font-size: 64px;
+    font-size: 56px;
     display: flex;
     flex-direction: row;
     gap:16px;
@@ -75,16 +75,29 @@
   }
   
   .projectChatRealTimeHome_roomsItem{
-    max-width: 300px;
+    max-width: 400px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap:16px;
-    padding:10px 10px 3px 10px;
-    border-bottom: 2px solid #a7a7a7;
+    padding:10px;
+    border-radius: 8px;
   }
 
   .projectChatRealTimeHome_roomsDescription{
     padding-left: 3%;
     font-size: 14px;
     color:#a7a7a7 ;
+  }
+
+  .projectChatRealTimeHome_roomsButtonAcess{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #FFCA0E;
+    width: 150px;
+    height: 40px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    cursor: pointer;
   }
