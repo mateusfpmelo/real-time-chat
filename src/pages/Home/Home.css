@@ -101,3 +101,12 @@
     margin-bottom: 32px;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    
+    .projectChatRealTimeHome_title{
+      font-size: 36px;
+      flex-direction: column;
+    }
+  
+  }
