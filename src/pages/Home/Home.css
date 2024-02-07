@@ -147,7 +147,13 @@
   .projectChatRealTimeHome_roomsDiv{
     display: flex;
     flex-direction: column;
+  }
+  .projectChatRealTimeHome_roomsDivMaster{
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap:16px;
+
   }
 
   .projectChatRealTimeHome_roomsDivSendMessage{
@@ -157,6 +163,19 @@
     justify-content: center;
     gap: 16px;
   }
+  .projectChatRealTimeHome_row{
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+  }
+
+.projectChatRealTimeHome_gray{
+  color: #a7a7a7;
+}
+.projectChatRealTimeHome_msg{
+  padding-left: 2%;
+  font-size: 14px;
+}
   .projectChatRealTimeHome_roomsDivHistoryChat{
     width: 800px;
     display: flex;

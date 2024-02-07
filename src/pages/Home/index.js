@@ -225,20 +225,25 @@ const Home = () => {
                                     <div className={'projectChatRealTimeHome_roomsButtonAcess'} onClick={() => handleChatSelected(room.name)}>{showChatSelected && selectedRoom === room.name ? 'Ocultar' : 'Acessar'}</div>
                                     <br/>
                                     {showChatSelected && selectedRoom === room.name && 
-                                        <>
+                                        <div className='projectChatRealTimeHome_roomsDivMaster'>
                                             {chatRoomsSelected && chatRoomsSelected.historyChats && chatRoomsSelected.historyChats.reverse().map((message, index) => (
                                                 <div className='projectChatRealTimeHome_roomsDiv'>
                                                     <div key={index} className='projectChatRealTimeHome_roomsDivHistoryChat' >
-                                                        <div><BsPersonUp size={24} /> {message.send_by} ({message.send_at})</div>
+                                                        <div className='projectChatRealTimeHome_row'>
+                                                            <BsPersonUp size={24} />
+                                                            <div className='projectChatRealTimeHome_roomsDescription'>{message.send_by}</div>
+                                                        </div>
+                                                        <div className='projectChatRealTimeHome_gray'>({message.send_at})</div>
+                                                    
                                                     </div>
-                                                    <div className='projectChatRealTimeHome_roomsDescription'>{message.message}</div>
+                                                    <div className='projectChatRealTimeHome_msg'>{message.message}</div>
                                                 </div>
                                             ))}
                                             <div className='projectChatRealTimeHome_roomsDivSendMessage'>
                                                 <input type='text' placeholder='Digite uma mensagem' className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
                                                 <div className='projectChatRealTimeHome_roomsButtonAcessSend' onClick={() => handleSendMessage(room.name)}>Enviar</div>
                                             </div>
-                                        </>
+                                        </div>
                                     }
                                     <br/>
                                     
