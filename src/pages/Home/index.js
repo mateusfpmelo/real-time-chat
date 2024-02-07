@@ -150,6 +150,7 @@ const Home = () => {
         let chatRoomsUpdated = JSON.parse(localStorage.getItem('chatRooms'))
         console.log('Chat Rooms:', chatRoomsUpdated)
         updateChatRooms()
+        setDivShowInputChatRoom(false)
 
 
     }
