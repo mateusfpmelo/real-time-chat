@@ -105,6 +105,20 @@
     margin-bottom: 32px;
     cursor: pointer;
   }
+  
+  .projectChatRealTimeHome_roomsButtonAcessSelected{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFCA0E;
+    border: 1px solid #FFCA0E;
+    width: 150px;
+    height: 40px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    color: white;
+    cursor: pointer;
+  }
 
   .projectChatRealTimeHomeSecondButton {
     width: 150px;
@@ -129,12 +143,32 @@
     align-items: center;
     padding-left:1%;
   }
-  
+
+  .projectChatRealTimeHome_roomsDivSendMessage{
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .projectChatRealTimeHome_roomsDivSendMessageInput{
+    width: 70%;
+  }
+
   @media (max-width: 768px) {
     
     .projectChatRealTimeHome_title{
       font-size: 36px;
       flex-direction: column;
     }
+    .projectChatRealTimeHome_roomsDivSendMessage{
+      width: 380px;
+      gap: 12px;
+    }
+    .projectChatRealTimeHome_roomsDivSendMessageInput{
+      width: 50%;
+    }
+  
   
   }

@@ -6,13 +6,17 @@ import { MdDriveFileRenameOutline } from "react-icons/md"
 import { MdDescription } from "react-icons/md"
 import { MdPublic } from "react-icons/md"
 import { MdOutlinePrivacyTip } from "react-icons/md"
+import { IoSend } from "react-icons/io5"
 
 const Home = () => {
     const [showUserName, setShowUserName] = useState(null)
     const [showUserEmail, setShowUserEmail] = useState(null)
     const [contentChatRooms, setContentChatRooms] = useState([])
     const [divShowInputChatRoom, setDivShowInputChatRoom] = useState(false)
+    const [inputMessageChat, setInputMessageChat] = useState(null)
+    const [showChatSelected, setShowChatSelected] = useState(false)
     const [inputNameChatRoom, setInputNameChatRoom] = useState(null)
+    const [selectedRoom, setSelectedRoom] = useState(null)
     const [inputSelectedAccess, setInputSelectedAccess] = useState(null)
     const [divAlert, setDivAlert] = useState(false)
     const [divTextAlert, setDivTextAlert] = useState(null)
@@ -54,11 +58,11 @@ const Home = () => {
     
     useEffect(() => {
 
-    if (divAlert) {
-    const timeoutId = setTimeout(() => {
-        setDivAlert(false)
-        setDivTextAlert(null)
-    }, 3000)
+        if (divAlert) {
+        const timeoutId = setTimeout(() => {
+            setDivAlert(false)
+            setDivTextAlert(null)
+        }, 3000)
 
     return () => clearTimeout(timeoutId)
     }
@@ -129,6 +133,10 @@ const Home = () => {
 
     }
 
+    const handleChatSelected = (room) =>{
+        setSelectedRoom(room)
+        setShowChatSelected(true)
+    }
     const handleLogout = () => {
         navigate('/logout')
     }
@@ -158,12 +166,25 @@ const Home = () => {
                                     </div>
                                     <div className='projectChatRealTimeHome_roomsDescription'>Descrição: {room.description}</div>
                                     
-                                    <div className='projectChatRealTimeHome_roomsButtonAcess'>ACESSAR</div>
+                                    <div className={showChatSelected && selectedRoom === room.name ? 'projectChatRealTimeHome_roomsButtonAcessSelected' : 'projectChatRealTimeHome_roomsButtonAcess'} onClick={() => handleChatSelected(room.name)}>{showChatSelected && selectedRoom === room.name ? 'Chat aberto' : 'Acessar'}</div>
+                                    <br/>
+                                    {showChatSelected && selectedRoom === room.name && 
+                                        <>
+                                            <div>AQUI O HISTÓRICO DO CHAT</div>
+                                            <div className='projectChatRealTimeHome_roomsDivSendMessage'>
+                                                
+                                                <input type='text' placeholder='Digite uma mensagem' className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
+                                                <div className='projectChatRealTimeHome_roomsButtonAcess'>Enviar</div>
+                                            </div>
+                                        </>
+                                    }
+                                    <br/>
                                     
                                 </>
                             ) : null}
                         </div>
                 ))}
+                
                 <br/>
                 <button onClick={handleShowNewChatRoom}>Nova Sala</button>
                 <br/>
