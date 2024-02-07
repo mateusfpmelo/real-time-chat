@@ -156,11 +156,23 @@ const Home = () => {
         setSelectedRoom(roomName)
         setShowChatSelected(!showChatSelected)
         setInputMessageChat('')
-        console.log('1')
         let chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
         const updatedRoom = chatRooms.find(room => room.name === roomName)
         setChatRoomsSelected(updatedRoom)
-        console.log('100')
+    }
+
+    const handleMessageAutomatic = (roomName) => {
+        let chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
+        const room = chatRooms.find(room => room.name === roomName)
+        const automaticMessage = {
+            message: 'mensagem automática, <3',
+            send_at: new Date().toLocaleString(), 
+            send_by: 'automatic@automatic.com'
+        }
+        room.historyChats.push(automaticMessage)
+        localStorage.setItem('chatRooms', JSON.stringify(chatRooms))
+        const updatedRoom = chatRooms.find(room => room.name === roomName)
+        setChatRoomsSelected(updatedRoom)
     }
 
     const handleSendMessage = (roomName) => {
@@ -178,17 +190,13 @@ const Home = () => {
             } else {
                 room.historyChats.push(newMessage)
             }
+            localStorage.setItem('chatRooms', JSON.stringify(chatRooms))
+            const updatedRoom = chatRooms.find(room => room.name === roomName)
+            setChatRoomsSelected(updatedRoom)
+            setInputMessageChat('')
             setTimeout(() => {
-                const automaticMessage = {
-                    message: 'Simulação de conversa',
-                    send_at: new Date().toLocaleString(), 
-                    send_by: 'automatic@automatic.com'
-                }
-                room.historyChats.push(automaticMessage)
-                localStorage.setItem('chatRooms', JSON.stringify(chatRooms))
-                const updatedRoom = chatRooms.find(room => room.name === roomName)
-                setChatRoomsSelected(updatedRoom)
-            }, 3000)
+                handleMessageAutomatic(room.name)
+            }, 5000)
             setInputMessageChat('')
         }
     }
@@ -226,24 +234,29 @@ const Home = () => {
                                     <br/>
                                     {showChatSelected && selectedRoom === room.name && 
                                         <div className='projectChatRealTimeHome_roomsDivMaster'>
-                                            {chatRoomsSelected && chatRoomsSelected.historyChats && chatRoomsSelected.historyChats.reverse().map((message, index) => (
-                                                <div className='projectChatRealTimeHome_roomsDiv'>
-                                                    <div key={index} className='projectChatRealTimeHome_roomsDivHistoryChat' >
-                                                        <div className='projectChatRealTimeHome_row'>
-                                                            <BsPersonUp size={24} />
-                                                            <div className='projectChatRealTimeHome_roomsDescription'>{message.send_by}</div>
+                                            {chatRoomsSelected && chatRoomsSelected.historyChats && chatRoomsSelected.historyChats
+                                                .sort((a, b) => new Date(b.send_at) - new Date(a.send_at))
+                                                .map((message, index) => (
+                                                    <div className='projectChatRealTimeHome_roomsDiv' key={index}>
+                                                        <div className='projectChatRealTimeHome_roomsDivHistoryChat'>
+                                                            <div className='projectChatRealTimeHome_row'>
+                                                                <BsPersonUp size={24} />
+                                                                <div className='projectChatRealTimeHome_roomsDescription'>{message.send_by}</div>
+                                                            </div>
+                                                            <div className='projectChatRealTimeHome_gray'>({message.send_at})</div>
                                                         </div>
-                                                        <div className='projectChatRealTimeHome_gray'>({message.send_at})</div>
-                                                    
+                                                        <div className='projectChatRealTimeHome_msg'><b>{message.message}</b></div>
                                                     </div>
-                                                    <div className='projectChatRealTimeHome_msg'>{message.message}</div>
-                                                </div>
                                             ))}
+                                        </div>
+                                    }
+                                    {showChatSelected && selectedRoom === room.name && 
+                                        <>
                                             <div className='projectChatRealTimeHome_roomsDivSendMessage'>
                                                 <input type='text' placeholder='Digite uma mensagem' className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
                                                 <div className='projectChatRealTimeHome_roomsButtonAcessSend' onClick={() => handleSendMessage(room.name)}>Enviar</div>
                                             </div>
-                                        </div>
+                                        </>
                                     }
                                     <br/>
                                     

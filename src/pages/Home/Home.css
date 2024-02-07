@@ -91,7 +91,6 @@
   .projectChatRealTimeHome_roomsDescription{
     padding-left: 3%;
     font-size: 14px;
-    color:#a7a7a7 ;
   }
 
   .projectChatRealTimeHome_roomsButtonAcess{
@@ -153,7 +152,12 @@
     flex-direction: column;
     align-items: center;
     gap:16px;
-
+    max-width: 80%;
+    max-height: 500px; 
+    overflow-y: auto; 
+    background-color: #a7a7a7;
+    border-radius: 10px;
+    padding:5% 0;
   }
 
   .projectChatRealTimeHome_roomsDivSendMessage{
@@ -170,11 +174,11 @@
   }
 
 .projectChatRealTimeHome_gray{
-  color: #a7a7a7;
 }
 .projectChatRealTimeHome_msg{
-  padding-left: 2%;
+  padding-left: 5%;
   font-size: 14px;
+  color:#323232;
 }
   .projectChatRealTimeHome_roomsDivHistoryChat{
     width: 800px;
@@ -199,6 +203,16 @@
     }
     .projectChatRealTimeHome_roomsDivSendMessageInput{
       width: 50%;
+    }
+    .projectChatRealTimeHome_roomsDivMaster{
+      max-width: 100%;
+      padding-left: 16px;
+    }
+
+    .projectChatRealTimeHome_roomsDivHistoryChat{
+      width: 400px;
+      flex-direction: column;
+      margin-bottom: 16px;
     }
   
   
