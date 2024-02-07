@@ -47,6 +47,10 @@ const Home = () => {
         }
     }, [userLogged, navigate, users])
 
+    const showAlert = (message) => {
+        setDivTextAlert(message)
+        setDivAlert(true)
+    }
     
     const updateChatRooms = () => {
         const chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
@@ -105,18 +109,15 @@ const Home = () => {
 
     const handleNewChatRoom = () => {
         if(!inputNameChatRoom){
-            setDivTextAlert('Nome da sala não informado.')
-            setDivAlert(true)
+            showAlert('Nome da sala não informado.')
             return
         }
         if(!inputDescriptionChatRoom){
-            setDivTextAlert('Descrição da sala não informada.')
-            setDivAlert(true)
+            showAlert('Descrição da sala não informada.')
             return
         }
         if(!inputSelectedAccess){
-            setDivTextAlert('Tipo de acesso não selecionado.')
-            setDivAlert(true)
+            showAlert('Tipo de acesso não selecionado.')
             return
         }
         
@@ -140,9 +141,7 @@ const Home = () => {
         chatRooms.push(newChatRoom)
 
         localStorage.setItem('chatRooms', JSON.stringify(chatRooms))
-
-        setDivTextAlert('Sala de bate-papo criada com sucesso.')
-        setDivAlert(true)
+        showAlert('Sala de bate-papo criada com sucesso.')
 
         setInputNameChatRoom('')
         setInputDescriptionChatRoom('')
@@ -215,6 +214,23 @@ const Home = () => {
         setShowDivInvite(!showDivInvite)
     }
 
+    const handleInsertAccess = (roomName, newEmail) => {
+        let chatRooms = JSON.parse(localStorage.getItem('chatRooms')) || []
+
+        const roomIndex = chatRooms.findIndex(room => room.name === roomName)
+        if (roomIndex !== -1) {
+            chatRooms[roomIndex].emailAccessList.push(newEmail)
+
+            localStorage.setItem('chatRooms', JSON.stringify(chatRooms))
+            showAlert('Inserido com sucesso.')
+            setInputInviteRoom('')
+            setShowChatSelected(false)
+            return true
+        }
+        showAlert('Sala não encontrada.')
+        return false
+    }
+
     return(
         <div className='projectChatRealTimeHome'>
             <>
@@ -251,9 +267,9 @@ const Home = () => {
                                                     <>
                                                         <div><b>C O N V I T E - SALA PRIVADA</b></div>
                                                         <input type='text' placeholder='Digite um e-mail'  value={inputInviteRoom} onChange={(e) => setInputInviteRoom(e.target.value)}></input>
-                                                        <div className='projectChatRealTimeHome_roomsButtonAcessSend' >Convidar</div>
+                                                        <div className='projectChatRealTimeHome_roomsButtonAcessSend' onClick={() => handleInsertAccess(room.name, inputInviteRoom)}>Convidar</div>
                                                     </>
-                                                }
+                                                }   
                                                 
                                         </>
                                     }
