@@ -119,6 +119,21 @@
     margin-bottom: 32px;
     cursor: pointer;
   }
+
+  .projectChatRealTimeHome_roomsButtonInvite{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #3c3c3c;
+    background-color: #3c3c3c;
+    color:white;
+    width: 150px;
+    height: 40px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    cursor: pointer;
+
+  }
   
   .projectChatRealTimeHomeSecondButton {
     width: 150px;

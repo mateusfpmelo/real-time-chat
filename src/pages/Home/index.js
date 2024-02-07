@@ -21,6 +21,8 @@ const Home = () => {
     const [selectedRoom, setSelectedRoom] = useState(null)
     const [inputSelectedAccess, setInputSelectedAccess] = useState(null)
     const [loadingSendMsg, setLoadingSendMsg] = useState(false)
+    const [showDivInvite, setShowDivInvite] = useState(false)
+    const [inputInviteRoom, setInputInviteRoom] = useState(null)
     const [divAlert, setDivAlert] = useState(false)
     const [divTextAlert, setDivTextAlert] = useState(null)
     const [inputDescriptionChatRoom, setInputDescriptionChatRoom] = useState(null)
@@ -208,6 +210,11 @@ const Home = () => {
     const handleLogout = () => {
         navigate('/logout')
     }
+
+    const handleShowDivInvite = () => {
+        setShowDivInvite(!showDivInvite)
+    }
+
     return(
         <div className='projectChatRealTimeHome'>
             <>
@@ -236,6 +243,20 @@ const Home = () => {
                                     
                                     <div className={'projectChatRealTimeHome_roomsButtonAcess'} onClick={() => handleChatSelected(room.name)}>{showChatSelected && selectedRoom === room.name ? 'Ocultar' : 'Acessar'}</div>
                                     <br/>
+                                    {showChatSelected && room.accessType !== 'public' && 
+                                        <>
+                                                <div onClick={handleShowDivInvite} className='projectChatRealTimeHome_roomsButtonInvite'>{showDivInvite ? 'Ocultar' : 'Convidar'}</div>
+                                                
+                                                {showDivInvite  && 
+                                                    <>
+                                                        <div><b>C O N V I T E - SALA PRIVADA</b></div>
+                                                        <input type='text' placeholder='Digite um e-mail'  value={inputInviteRoom} onChange={(e) => setInputInviteRoom(e.target.value)}></input>
+                                                        <div className='projectChatRealTimeHome_roomsButtonAcessSend' >Convidar</div>
+                                                    </>
+                                                }
+                                                
+                                        </>
+                                    }
                                     {showChatSelected && selectedRoom === room.name && 
                                         <div className='projectChatRealTimeHome_roomsDivMaster'>
                                             {chatRoomsSelected && chatRoomsSelected.historyChats && chatRoomsSelected.historyChats
