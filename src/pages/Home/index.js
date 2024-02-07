@@ -6,7 +6,6 @@ import { MdDriveFileRenameOutline } from "react-icons/md"
 import { MdDescription } from "react-icons/md"
 import { MdPublic } from "react-icons/md"
 import { MdOutlinePrivacyTip } from "react-icons/md"
-import { IoSend } from "react-icons/io5"
 
 const Home = () => {
     const [showUserName, setShowUserName] = useState(null)
@@ -148,7 +147,7 @@ const Home = () => {
                     {showUserName &&<div>  {showUserName.toUpperCase()}!</div>}
                     
                 </div>
-                {contentChatRooms != '' &&
+                {contentChatRooms !== '' &&
                     <>
                         <br/>
                         <label><b className='projectChatRealTimeHome_textYellow'>S A L A S</b></label>
