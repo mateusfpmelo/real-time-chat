@@ -6,10 +6,12 @@ import { MdDriveFileRenameOutline } from "react-icons/md"
 import { MdDescription } from "react-icons/md"
 import { MdPublic } from "react-icons/md"
 import { MdOutlinePrivacyTip } from "react-icons/md"
+import { BsPersonUp } from "react-icons/bs"
 
 const Home = () => {
     const [showUserName, setShowUserName] = useState(null)
     const [showUserEmail, setShowUserEmail] = useState(null)
+    const [chatRoomsSelected, setChatRoomsSelected] = useState(null)
     const [contentChatRooms, setContentChatRooms] = useState([])
     const [divShowInputChatRoom, setDivShowInputChatRoom] = useState(false)
     const [inputMessageChat, setInputMessageChat] = useState(null)
@@ -24,7 +26,11 @@ const Home = () => {
     const usersString = localStorage.getItem('users')
     const users = JSON.parse(usersString)
     const userLogged = localStorage.getItem('userLogged')
-    
+
+    useEffect(() => {
+        console.log('chatRoomsSelected foi alterado:', chatRoomsSelected)
+    }, [chatRoomsSelected])
+
     useEffect(() => {
         if (!userLogged) {
             navigate('/')
@@ -45,8 +51,21 @@ const Home = () => {
         }
     }
 
+    
+    useEffect(() => {
+        console.log(chatRoomsSelected)
+    }, [chatRoomsSelected])
+
+    useEffect(() => {
+        const chatRoomsSelected = JSON.parse(localStorage.getItem('chatRooms'))
+        console.log('useEffect chatroomsSelected:', chatRoomsSelected)
+        //const updatedRoom = chatRooms.find(room => room.name === roomName)
+        //setChatRoomsSelected(updatedRoom)
+    }, [])
+
     useEffect(() => {
         updateChatRooms()
+
     
         const intervalId = setInterval(() => {
             updateChatRooms()
@@ -132,11 +151,48 @@ const Home = () => {
 
     }
 
-    const handleChatSelected = (room) =>{
-        setSelectedRoom(room)
+    const handleChatSelected = (roomName) =>{
+        setChatRoomsSelected('')
+        setSelectedRoom(roomName)
         setShowChatSelected(!showChatSelected)
         setInputMessageChat('')
+        console.log('1')
+        let chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
+        const updatedRoom = chatRooms.find(room => room.name === roomName)
+        setChatRoomsSelected(updatedRoom)
+        console.log('100')
     }
+
+    const handleSendMessage = (roomName) => {
+        let chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
+        const room = chatRooms.find(room => room.name === roomName)
+        if (room) {
+            const newMessage = {
+                message: inputMessageChat,
+                send_at: new Date().toLocaleString(),
+                send_by: showUserEmail
+            }
+            // Verifique se a propriedade historyChats já existe na sala
+            if (!room.historyChats) {
+                room.historyChats = [newMessage]
+            } else {
+                room.historyChats.push(newMessage)
+            }
+            setTimeout(() => {
+                const automaticMessage = {
+                    message: 'Simulação de conversa',
+                    send_at: new Date().toLocaleString(), 
+                    send_by: 'automatic@automatic.com'
+                }
+                room.historyChats.push(automaticMessage)
+                localStorage.setItem('chatRooms', JSON.stringify(chatRooms))
+                const updatedRoom = chatRooms.find(room => room.name === roomName)
+                setChatRoomsSelected(updatedRoom)
+            }, 3000)
+            setInputMessageChat('')
+        }
+    }
+
     const handleLogout = () => {
         navigate('/logout')
     }
@@ -170,11 +226,17 @@ const Home = () => {
                                     <br/>
                                     {showChatSelected && selectedRoom === room.name && 
                                         <>
-                                            <div>AQUI O HISTÓRICO DO CHAT</div>
+                                            {chatRoomsSelected && chatRoomsSelected.historyChats && chatRoomsSelected.historyChats.reverse().map((message, index) => (
+                                                <div className='projectChatRealTimeHome_roomsDiv'>
+                                                    <div key={index} className='projectChatRealTimeHome_roomsDivHistoryChat' >
+                                                        <div><BsPersonUp size={24} /> {message.send_by} ({message.send_at})</div>
+                                                    </div>
+                                                    <div className='projectChatRealTimeHome_roomsDescription'>{message.message}</div>
+                                                </div>
+                                            ))}
                                             <div className='projectChatRealTimeHome_roomsDivSendMessage'>
-                                                
                                                 <input type='text' placeholder='Digite uma mensagem' className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
-                                                <div className='projectChatRealTimeHome_roomsButtonAcessSend'>Enviar</div>
+                                                <div className='projectChatRealTimeHome_roomsButtonAcessSend' onClick={() => handleSendMessage(room.name)}>Enviar</div>
                                             </div>
                                         </>
                                     }

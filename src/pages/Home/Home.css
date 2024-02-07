@@ -144,12 +144,23 @@
     align-items: center;
     padding-left:1%;
   }
+  .projectChatRealTimeHome_roomsDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .projectChatRealTimeHome_roomsDivSendMessage{
     width: 800px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 16px;
+  }
+  .projectChatRealTimeHome_roomsDivHistoryChat{
+    width: 800px;
+    display: flex;
+    flex-direction: row;
     gap: 16px;
   }
 
