@@ -33,6 +33,11 @@ const LoginRegister = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       return emailRegex.test(email)
     }
+    const showAlert = (message) => {
+      setDivTextAlert(message)
+      setDivAlert(true)
+  }
+  
   
     useEffect(() => {
   
@@ -60,8 +65,7 @@ const LoginRegister = () => {
 
     const handleContinue = () => {
       if (!isValidEmail(inputEmail)){
-        setDivTextAlert('Por favor, insira um e-mail válido!')
-        setDivAlert(true)
+        showAlert('Por favor, insira um e-mail válido!')
         return
       }
       const users = JSON.parse(localStorage.getItem('users'))
@@ -79,28 +83,23 @@ const LoginRegister = () => {
   
     const handleNewUser = () => {
       if(!inputRegisterName){
-        setDivTextAlert('Nome não informado')
-        setDivAlert(true)
+        showAlert('Nome não informado')
         return
       }
       if(inputRegisterPsw !== inputConfirmRegisterPsw){
-        setDivTextAlert('Senhas não coincidem!')
-        setDivAlert(true)
+        showAlert('Senhas não coincidem!')
         return
       }
       if(!inputRegisterPsw){
-        setDivTextAlert('Senha não informada.')
-        setDivAlert(true)
+        showAlert('Senha não informada.')
         return
       }
       if(!inputConfirmRegisterPsw){
-        setDivTextAlert('Confirmação de senha não informada.')
-        setDivAlert(true)
+        showAlert('Confirmação de senha não informada.')
         return
       }
       if(!inputEmail){
-        setDivTextAlert('E-mail não informado.')
-        setDivAlert(true)
+        showAlert('E-mail não informado.')
         return
       }
       const newUser = {
@@ -115,8 +114,7 @@ const LoginRegister = () => {
       setButtonContinuar(true)
       setDivContinueRegister(false)
       setInputEmail('')
-      setDivTextAlert('Cadastrado com sucesso!')
-      setDivAlert(true)
+      showAlert('Cadastrado com sucesso!')
     }
   
     const ConfirmEqualPsw =  (e) => {
@@ -133,13 +131,11 @@ const LoginRegister = () => {
     
     const handleLogin = () => {
       if(!inputEmail){
-        setDivTextAlert('E-mail não informado.')
-        setDivAlert(true)
+        showAlert('E-mail não informado.')
         return
       }
       if(!inputPsw){
-        setDivTextAlert('Senha não informada.')
-        setDivAlert(true)
+        showAlert('Senha não informada.')
         return
       }
 
@@ -147,14 +143,13 @@ const LoginRegister = () => {
       const user = users.find(user => user.email === inputEmail)
 
       if (!user) {
-        setDivTextAlert('E-mail não encontrado. ')
+        showAlert('E-mail não encontrado.')
         setDivAlert(true)
         return
       }
 
       if (user.senha !== inputPsw) {
-        setDivTextAlert('Senha incorreta.')
-        setDivAlert(true)
+        showAlert('Senha incorreta.')
         return
       }
       localStorage.setItem('userLogged', inputEmail)
