@@ -134,7 +134,8 @@ const Home = () => {
 
     const handleChatSelected = (room) =>{
         setSelectedRoom(room)
-        setShowChatSelected(true)
+        setShowChatSelected(!showChatSelected)
+        setInputMessageChat('')
     }
     const handleLogout = () => {
         navigate('/logout')
@@ -165,7 +166,7 @@ const Home = () => {
                                     </div>
                                     <div className='projectChatRealTimeHome_roomsDescription'>Descrição: {room.description}</div>
                                     
-                                    <div className={showChatSelected && selectedRoom === room.name ? 'projectChatRealTimeHome_roomsButtonAcessSelected' : 'projectChatRealTimeHome_roomsButtonAcess'} onClick={() => handleChatSelected(room.name)}>{showChatSelected && selectedRoom === room.name ? 'Chat aberto' : 'Acessar'}</div>
+                                    <div className={'projectChatRealTimeHome_roomsButtonAcess'} onClick={() => handleChatSelected(room.name)}>{showChatSelected && selectedRoom === room.name ? 'Ocultar' : 'Acessar'}</div>
                                     <br/>
                                     {showChatSelected && selectedRoom === room.name && 
                                         <>
@@ -173,7 +174,7 @@ const Home = () => {
                                             <div className='projectChatRealTimeHome_roomsDivSendMessage'>
                                                 
                                                 <input type='text' placeholder='Digite uma mensagem' className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
-                                                <div className='projectChatRealTimeHome_roomsButtonAcess'>Enviar</div>
+                                                <div className='projectChatRealTimeHome_roomsButtonAcessSend'>Enviar</div>
                                             </div>
                                         </>
                                     }

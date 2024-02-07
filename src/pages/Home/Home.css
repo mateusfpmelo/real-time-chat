@@ -105,21 +105,22 @@
     margin-bottom: 32px;
     cursor: pointer;
   }
+
   
-  .projectChatRealTimeHome_roomsButtonAcessSelected{
+  .projectChatRealTimeHome_roomsButtonAcessSend{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FFCA0E;
     border: 1px solid #FFCA0E;
+    background-color: #FFCA0E;
+    color:#323232;
     width: 150px;
     height: 40px;
     border-radius: 16px;
     margin-bottom: 32px;
-    color: white;
     cursor: pointer;
   }
-
+  
   .projectChatRealTimeHomeSecondButton {
     width: 150px;
     height: 40px;
