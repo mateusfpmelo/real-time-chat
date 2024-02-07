@@ -7,6 +7,7 @@ import { MdDescription } from "react-icons/md"
 import { MdPublic } from "react-icons/md"
 import { MdOutlinePrivacyTip } from "react-icons/md"
 import { BsPersonUp } from "react-icons/bs"
+import iconLoading from '../../img/loadingicon.png'
 
 const Home = () => {
     const [showUserName, setShowUserName] = useState(null)
@@ -19,6 +20,7 @@ const Home = () => {
     const [inputNameChatRoom, setInputNameChatRoom] = useState(null)
     const [selectedRoom, setSelectedRoom] = useState(null)
     const [inputSelectedAccess, setInputSelectedAccess] = useState(null)
+    const [loadingSendMsg, setLoadingSendMsg] = useState(false)
     const [divAlert, setDivAlert] = useState(false)
     const [divTextAlert, setDivTextAlert] = useState(null)
     const [inputDescriptionChatRoom, setInputDescriptionChatRoom] = useState(null)
@@ -28,8 +30,8 @@ const Home = () => {
     const userLogged = localStorage.getItem('userLogged')
 
     useEffect(() => {
-        console.log('chatRoomsSelected foi alterado:', chatRoomsSelected)
-    }, [chatRoomsSelected])
+        console.log('loadingSendMsg foi alterado:', loadingSendMsg)
+    }, [loadingSendMsg])
 
     useEffect(() => {
         if (!userLogged) {
@@ -176,6 +178,7 @@ const Home = () => {
     }
 
     const handleSendMessage = (roomName) => {
+        setLoadingSendMsg(true)
         let chatRooms = JSON.parse(localStorage.getItem('chatRooms'))
         const room = chatRooms.find(room => room.name === roomName)
         if (room) {
@@ -196,6 +199,7 @@ const Home = () => {
             setInputMessageChat('')
             setTimeout(() => {
                 handleMessageAutomatic(room.name)
+                setLoadingSendMsg(false)
             }, 5000)
             setInputMessageChat('')
         }
@@ -235,7 +239,6 @@ const Home = () => {
                                     {showChatSelected && selectedRoom === room.name && 
                                         <div className='projectChatRealTimeHome_roomsDivMaster'>
                                             {chatRoomsSelected && chatRoomsSelected.historyChats && chatRoomsSelected.historyChats
-                                                .sort((a, b) => new Date(b.send_at) - new Date(a.send_at))
                                                 .map((message, index) => (
                                                     <div className='projectChatRealTimeHome_roomsDiv' key={index}>
                                                         <div className='projectChatRealTimeHome_roomsDivHistoryChat'>
@@ -253,8 +256,12 @@ const Home = () => {
                                     {showChatSelected && selectedRoom === room.name && 
                                         <>
                                             <div className='projectChatRealTimeHome_roomsDivSendMessage'>
-                                                <input type='text' placeholder='Digite uma mensagem' className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
-                                                <div className='projectChatRealTimeHome_roomsButtonAcessSend' onClick={() => handleSendMessage(room.name)}>Enviar</div>
+                                                <input type='text' placeholder='Digite uma mensagem' disabled={loadingSendMsg}  className='projectChatRealTimeHome_roomsDivSendMessageInput' value={inputMessageChat} onChange={(e) => setInputMessageChat(e.target.value)}></input>
+                                                {loadingSendMsg ? (
+                                                    <img src={iconLoading} alt={'Imagem de carregamento'} className='loadingIcon' />
+                                                ) : (
+                                                    <div className='projectChatRealTimeHome_roomsButtonAcessSend' onClick={() => handleSendMessage(room.name)}>Enviar</div>
+                                                )}
                                             </div>
                                         </>
                                     }
