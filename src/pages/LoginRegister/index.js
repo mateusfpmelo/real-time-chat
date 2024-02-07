@@ -53,6 +53,7 @@ const LoginRegister = () => {
   
     const clearLocalStorage = () => {
       localStorage.removeItem('users')
+      localStorage.removeItem('chatRooms')
       setButtonContinuar(true)
       setDivContinueLogin(false)
       setDivContinueRegister(false)
